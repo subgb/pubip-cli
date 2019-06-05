@@ -7,7 +7,10 @@
   },
   "author": "shia",
   "license": "MIT",
-  "repository": "subgb/pubip-cli",
+  "repository": "https://github.com/subgb/pubip-cli",
+  "bin": {
+    "pubip": "cli.js"
+  },
   "keywords": [
     "cli-app",
     "cli",
