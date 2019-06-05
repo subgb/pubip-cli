@@ -1,0 +1,17 @@
+{
+  "name": "pubip-cli",
+  "version": "1.0.0",
+  "description": "Show your public ip address",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "shia",
+  "license": "MIT",
+  "repository": "subgb/pubip-cli",
+  "keywords": [
+    "cli-app",
+    "cli",
+    "ip",
+    "proxy"
+  ]
+}
