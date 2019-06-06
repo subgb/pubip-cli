@@ -7,6 +7,7 @@ const SocksProxyAgent = require('socks-proxy-agent');
 let proxy = process.argv[2];
 if (/^\d{2,5}$/.test(proxy)) proxy='socks://127.0.0.1:'+proxy;
 else if (/...:\d{2,5}$/.test(proxy)) proxy='socks://'+proxy;
+else proxy = null;
 
 const rd = request.defaults({
 	timeout: 8e3,
