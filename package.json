@@ -18,7 +18,7 @@
     "proxy"
   ],
   "dependencies": {
-    "request": "^2.88.0",
-    "socks-proxy-agent": "^4.0.2"
+    "proxy-agent": "^5.0.0",
+    "request": "^2.88.0"
   }
 }

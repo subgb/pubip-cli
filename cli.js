@@ -1,27 +1,30 @@
 #!/usr/bin/env node
 
 const request = require('request');
-const SocksProxyAgent = require('socks-proxy-agent');
+const ProxyAgent = require('proxy-agent');
 
 
 let proxy = process.argv[2];
-if (/^\d{2,5}$/.test(proxy)) proxy='socks://127.0.0.1:'+proxy;
+if (/.+:\/\/.+/.test(proxy)) {}
+else if (/^\d{2,5}$/.test(proxy)) proxy='socks://127.0.0.1:'+proxy;
 else if (/...:\d{2,5}$/.test(proxy)) proxy='socks://'+proxy;
 else proxy = null;
 
 const rd = request.defaults({
-	timeout: 8e3,
-	agent: proxy? new SocksProxyAgent(proxy): undefined,
+	timeout: 5e3,
+	agent: proxy? new ProxyAgent(proxy): undefined,
 	headers: {'user-agent': 'curl/7.55.1'},
 });
 
 const via = proxy? 'via PROXY '+proxy: 'DIRECT';
 console.log(`Your Public IP Address: (${via})\n`);
-fetch('http://ipv4.icanhazip.com');
-fetch('http://ifconfig.me');
+fetch('https://checkip.amazonaws.com');
+fetch('https://httpbin.org/ip');
 fetch('http://myip.ipip.net');
+fetch('http://ipv4.icanhazip.com');
 fetch('http://cip.cc');
-fetch('https://ipinfo.io');
+fetch('http://ifconfig.me');
+fetch('http://ipinfo.io');
 
 function fetch(url, agent) {
 	rd(url, (err, resp, body) => {
