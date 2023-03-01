@@ -18,8 +18,8 @@ const opts = {
 if (/^http:/.test(proxy)) opts.rejectUnauthorized = false;
 const rd = request.defaults(opts);
 
-const via = proxy? 'via PROXY '+proxy: 'DIRECT';
-console.log(`Your Public IP Address: (${via})\n`);
+const via = proxy? `via PROXY \x1b[32m${proxy}\x1b[0m`: 'DIRECT';
+console.log(`Your Public IP Address: ( ${via} )\n`);
 fetch('https://checkip.amazonaws.com');
 fetch('https://httpbin.org/ip');
 fetch('http://myip.ipip.net');
