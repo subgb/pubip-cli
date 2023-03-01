@@ -5,16 +5,18 @@ const ProxyAgent = require('proxy-agent');
 
 
 let proxy = process.argv[2];
-if (/.+:\/\/.+/.test(proxy)) {}
-else if (/^\d{2,5}$/.test(proxy)) proxy='socks://127.0.0.1:'+proxy;
-else if (/...:\d{2,5}$/.test(proxy)) proxy='socks://'+proxy;
+if (/.+:\/\/.+/.test(proxy)) proxy=proxy.replace(/\/\/:/, '//127.0.0.1:');
+else if (/^:?(\d{2,5})$/.test(proxy)) proxy='socks5h://127.0.0.1:'+RegExp.$1;
+else if (/...:\d{2,5}$/.test(proxy)) proxy='socks5h://'+proxy;
 else proxy = null;
 
-const rd = request.defaults({
+const opts = {
 	timeout: 5e3,
 	agent: proxy? new ProxyAgent(proxy): undefined,
 	headers: {'user-agent': 'curl/7.55.1'},
-});
+};
+if (/^http:/.test(proxy)) opts.rejectUnauthorized = false;
+const rd = request.defaults(opts);
 
 const via = proxy? 'via PROXY '+proxy: 'DIRECT';
 console.log(`Your Public IP Address: (${via})\n`);
